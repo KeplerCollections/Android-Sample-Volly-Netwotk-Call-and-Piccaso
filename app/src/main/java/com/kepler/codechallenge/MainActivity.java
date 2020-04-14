@@ -3,11 +3,18 @@ package com.kepler.codechallenge;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.kepler.codechallenge.boilers.BaseActivity;
+
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_main;
     }
 }

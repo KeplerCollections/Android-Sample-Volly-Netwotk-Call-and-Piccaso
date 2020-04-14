@@ -1,6 +1,5 @@
 package com.kepler.codechallenge;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.kepler.codechallenge.boilers.BaseActivity;

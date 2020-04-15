@@ -5,6 +5,6 @@ public interface VolleyCallback<T> {
 
     void onResponse(T response);
 
-    void onError(String errorMessage);
+    void onError(Throwable errorMessage);
 
 }

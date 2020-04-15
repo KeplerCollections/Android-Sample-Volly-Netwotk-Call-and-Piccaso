@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Code Challenge</string>
+    <string name="deliveries">Things to Deliver</string>
+    <string name="refresh">refresh</string>
+    <string name="delivery_details">Delivery Details</string>
 </resources>

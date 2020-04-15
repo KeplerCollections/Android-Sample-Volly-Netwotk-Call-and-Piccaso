@@ -27,6 +27,14 @@ public abstract class MVPActivity<T extends MVP.BasePresenter> extends BaseActiv
     }
 
     @Override
+    protected void onStop() {
+        if (this.presenter != null) {
+            this.presenter.onStopCalled();
+        }
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         if (this.presenter != null) {
             this.presenter.detachView();

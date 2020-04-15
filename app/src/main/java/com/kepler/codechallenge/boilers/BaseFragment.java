@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T> extends Fragment {
 
-    protected FragmentCommunicator communicator;
+    protected T communicator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,8 +24,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof FragmentCommunicator)
-            communicator = (FragmentCommunicator) context;
+        if(context instanceof MainFragmentCommunicator)
+            communicator = (T) context;
     }
 
 

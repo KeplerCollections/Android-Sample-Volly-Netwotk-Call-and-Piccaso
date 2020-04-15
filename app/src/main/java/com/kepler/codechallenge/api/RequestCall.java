@@ -4,44 +4,54 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 public abstract class RequestCall {
 
-    public static final String BASE = "http://demo3196012.mockable.io/";
+    public static final String BASE = "http://demo3196012.mockable.io";
+    public static final String EP_DELIVERIES = "/deliveries";
     private RequestQueue mRequestQueue;
 
+    public void jsonArrayRequest(String urlAppender, final VolleyCallback volleyCallback) {
+        CustomJsonArrayRequest jsonObjectRequest = new CustomJsonArrayRequest(Request.Method.GET, BASE + urlAppender, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                volleyCallback.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyCallback.onError(error);
 
-    public void jsonRequest(String urlAppender, final VolleyCallback volleyCallback) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, BASE + urlAppender, null, response -> volleyCallback.onResponse(response), error -> {
-                    // TODO: Handle error
-                    volleyCallback.onError(error.getMessage());
+            }
+        });
 
-                });
-
+        getRequestQueue().add(jsonObjectRequest);
 
 // Access the RequestQueue through your singleton class.
     }
 
     public void stringRequest(String urlAppender, final VolleyCallback volleyCallback) {
-        StringRequest stringRequest = new StringRequest
-                (Request.Method.GET, BASE + urlAppender, response -> volleyCallback.onResponse(response), error -> {
-                    // TODO: Handle error
-                    volleyCallback.onError(error.getMessage());
+        CustomStringRequest customStringRequest = new CustomStringRequest(Request.Method.GET, BASE + urlAppender, null, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                volleyCallback.onResponse(response);
 
-                }) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyCallback.onError(error);
 
-        };
+            }
+        });
 
-        getRequestQueue().add(stringRequest);
-
+        getRequestQueue().add(customStringRequest);
 
 // Access the RequestQueue through your singleton class.
     }
+
 
     protected RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {

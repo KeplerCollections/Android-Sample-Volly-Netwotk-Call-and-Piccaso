@@ -22,6 +22,5 @@ public interface MVP {
 
         void detachView();
 
-        void onStopCalled();
     }
 }

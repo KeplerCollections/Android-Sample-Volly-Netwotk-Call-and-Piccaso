@@ -1,19 +1,14 @@
 package com.kepler.codechallenge;
 
 import android.os.Bundle;
-import android.os.Handler;
 
-import com.kepler.codechallenge.api.VolleyCallback;
+import com.kepler.codechallenge.boilers.BaseFragment;
 import com.kepler.codechallenge.boilers.MVPActivity;
-import com.kepler.codechallenge.boilers.MainFragmentCommunicator;
+import com.kepler.codechallenge.support.interfaces.MainFragmentCommunicator;
 import com.kepler.codechallenge.presenters.AppLogic;
 import com.kepler.codechallenge.presenters.MainPresnter;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 import static com.kepler.codechallenge.api.RequestCall.EP_DELIVERIES;
 
@@ -28,7 +23,7 @@ public class MainActivity extends MVPActivity<AppLogic.MainLogic> implements App
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addFragment(new FragmentListOfDeliveries());
+        replaceFragment(new FragmentListOfDeliveries());
     }
 
     @Override
@@ -57,20 +52,27 @@ public class MainActivity extends MVPActivity<AppLogic.MainLogic> implements App
     }
 
     @Override
-    protected void onStop() {
-        presenter.onStopCalled();
-        super.onStop();
+    public void addNewFragment(BaseFragment baseFragment) {
+
     }
 
     @Override
-    public void loadDeleiveries(DisposableSingleObserver disposableSingleObserver) {
-        addFragment(new FragmentDeliveryDetail());
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                presenter.loadData(EP_DELIVERIES,disposableSingleObserver);
+    public void replaceNewFragment(BaseFragment baseFragment) {
+        replaceFragment(baseFragment,null);
+    }
 
-            }
-        },5000);
+    @Override
+    public void handleBackButton(boolean enable) {
+        if (enable) {
+            enableBackButton();
+        } else {
+            disableBackButton();
+        }
+    }
+
+
+    @Override
+    public void loadDeleiveries(DisposableSingleObserver disposableSingleObserver) {
+        presenter.loadData(EP_DELIVERIES, disposableSingleObserver);
     }
 }

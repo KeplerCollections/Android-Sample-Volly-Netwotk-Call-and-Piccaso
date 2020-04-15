@@ -2,10 +2,13 @@ package com.kepler.codechallenge.presenters;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.JsonArray;
 import com.kepler.codechallenge.api.VolleyCallback;
 import com.kepler.codechallenge.api.VolleyController;
 import com.kepler.codechallenge.boilers.MVPImpl;
 import com.kepler.codechallenge.pojo.DeliveriesDetails;
+
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -37,29 +40,25 @@ public class MainPresnter extends MVPImpl<AppLogic.MainView> implements AppLogic
 
     }
 
-    @Override
-    public void onStopCalled() {
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
-        }
-        super.onStopCalled();
-    }
-
-
 
     public Single<String> getDeliveries(String url_appender) {
         return Single.create(new SingleOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull final SingleEmitter<String> e) {
-                VolleyController.getInstance(view.getApplicationContext()).stringRequest(url_appender, new VolleyCallback<String>() {
+                VolleyController.getInstance(view.getApplicationContext()).jsonArrayRequest(url_appender, new VolleyCallback<JSONArray>() {
                     @Override
-                    public void onResponse(String response) {
-                        e.onSuccess(response);
+                    public void onResponse(JSONArray response) {
+                        e.onSuccess(response.toString());
                     }
 
                     @Override
                     public void onError(Throwable errorMessage) {
-                        e.onError(errorMessage);
+                        try {
+                            if(!e.isDisposed())
+                            e.onError(errorMessage);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
 
                 });

@@ -28,7 +28,7 @@ public abstract class BaseFragment<T extends BaseFragmentCommunicator> extends F
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof MainFragmentCommunicator)
+        if (context instanceof MainFragmentCommunicator)
             communicator = (T) context;
     }
 
@@ -50,7 +50,7 @@ public abstract class BaseFragment<T extends BaseFragmentCommunicator> extends F
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        view = inflater.inflate(getViewResource(), container, false);
         View view = inflater.inflate(getContentView(), container, false);
-        unbinder = ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -61,4 +61,15 @@ public abstract class BaseFragment<T extends BaseFragmentCommunicator> extends F
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    protected void addChildFragment(BaseFragment baseFragment) {
+        if (getFragmentContainer() == 0)
+            return;
+        getChildFragmentManager().beginTransaction().add(getFragmentContainer(), baseFragment).commit();
+    }
+
+    protected  int getFragmentContainer(){
+        return 0;
+    }
+
 }

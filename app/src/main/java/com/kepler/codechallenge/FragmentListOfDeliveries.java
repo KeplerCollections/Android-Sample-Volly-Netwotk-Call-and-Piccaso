@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.kepler.codechallenge.api.VolleyController;
 import com.kepler.codechallenge.boilers.BaseFragment;
 import com.kepler.codechallenge.pojo.DeliveriesDetails;
 import com.kepler.codechallenge.pojo.LocationDetails;
@@ -24,7 +25,6 @@ import butterknife.BindView;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 
 import static com.kepler.codechallenge.support.Constants.PARAM_DATA;
-import static com.kepler.codechallenge.support.Constants.PARAM_IMG_URL;
 
 public class FragmentListOfDeliveries extends BaseFragment<MainFragmentCommunicator> {
 
@@ -43,11 +43,11 @@ public class FragmentListOfDeliveries extends BaseFragment<MainFragmentCommunica
             public void onItemClick(DeliveriesDetails deliveriesDetails) {
 
                 bundle=new Bundle();
-                bundle.putParcelable(PARAM_DATA,deliveriesDetails.getLocation());
-                bundle.putString(PARAM_IMG_URL,deliveriesDetails.getImageUrl());
+                bundle.putParcelable(PARAM_DATA,deliveriesDetails);
                 communicator.replaceNewFragment(FragmentDeliveryDetail.getInstance(bundle));
             }
         });
+        communicator.loadDeleiveries(getObserver());
     }
 
     @Override
@@ -91,7 +91,6 @@ public class FragmentListOfDeliveries extends BaseFragment<MainFragmentCommunica
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 //        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
-        communicator.loadDeleiveries(getObserver());
     }
 
     @Override

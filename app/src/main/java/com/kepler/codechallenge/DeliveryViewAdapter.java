@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -11,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.ImageLoader;
 import com.kepler.codechallenge.pojo.DeliveriesDetails;
 import com.kepler.codechallenge.support.interfaces.SetOnRecyclerViewItemClickListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,6 @@ public class DeliveryViewAdapter extends RecyclerView.Adapter<DeliveryViewAdapte
 
     private final SetOnRecyclerViewItemClickListener setOnRecyclerViewItemClickListener;
     private List<DeliveriesDetails> dataSet = new ArrayList<>();
-    private int lastSelectedPosition = -1;
 
     public DeliveryViewAdapter(SetOnRecyclerViewItemClickListener setOnRecyclerViewItemClickListener) {
         this.setOnRecyclerViewItemClickListener = setOnRecyclerViewItemClickListener;
@@ -42,6 +43,12 @@ public class DeliveryViewAdapter extends RecyclerView.Adapter<DeliveryViewAdapte
     @Override
     public void onBindViewHolder(@NonNull LayoutViewHolder holder, int position) {
         holder.des.setText(dataSet.get(position).getDescription());
+        Picasso.get()
+                .load(dataSet.get(position).getImageUrl())
+                .placeholder(android.R.drawable.stat_sys_download_done)
+                .resize(50, 50)
+                .centerCrop()
+                .into(holder.imageview);
     }
 
     @Override
@@ -59,7 +66,7 @@ public class DeliveryViewAdapter extends RecyclerView.Adapter<DeliveryViewAdapte
         @BindView(R.id.des)
         TextView des;
         @BindView(R.id.imageview)
-        NetworkImageView imageview;
+        ImageView imageview;
 
         public LayoutViewHolder(View itemView) {
             super(itemView);

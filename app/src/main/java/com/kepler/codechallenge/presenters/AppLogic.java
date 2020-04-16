@@ -17,6 +17,9 @@ public class AppLogic {
 
     /********* Logic for Main************/
     public interface MainView extends RequiredBaseView {
+        void startProgressing();
+        void stopProgressing();
+
     }
 
     public interface MainLogic extends MVP.BasePresenter<MainView> {

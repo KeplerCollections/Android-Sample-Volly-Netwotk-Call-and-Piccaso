@@ -1,9 +1,13 @@
 package com.kepler.codechallenge.api;
 
+import android.graphics.Bitmap;
+import android.util.LruCache;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 
 import org.json.JSONArray;
 
@@ -11,7 +15,7 @@ public abstract class RequestCall {
 
     public static final String BASE = "http://demo3196012.mockable.io";
     public static final String EP_DELIVERIES = "/deliveries";
-    private RequestQueue mRequestQueue;
+    protected RequestQueue mRequestQueue;
 
     public void jsonArrayRequest(String urlAppender, final VolleyCallback volleyCallback) {
         CustomJsonArrayRequest jsonObjectRequest = new CustomJsonArrayRequest(Request.Method.GET, BASE + urlAppender, null, new Response.Listener<JSONArray>() {
@@ -27,7 +31,7 @@ public abstract class RequestCall {
             }
         });
 
-        getRequestQueue().add(jsonObjectRequest);
+        mRequestQueue.add(jsonObjectRequest);
 
 // Access the RequestQueue through your singleton class.
     }
@@ -47,27 +51,26 @@ public abstract class RequestCall {
             }
         });
 
-        getRequestQueue().add(customStringRequest);
+        mRequestQueue.add(customStringRequest);
 
 // Access the RequestQueue through your singleton class.
     }
 
 
-    protected RequestQueue getRequestQueue() {
+    protected void init() {
         if (mRequestQueue == null) {
             mRequestQueue = initRequestQueue();
         }
-        return mRequestQueue;
     }
 
     protected abstract RequestQueue initRequestQueue();
 
     protected void cancelAllRequests() {
-        getRequestQueue().cancelAll(null);
+        mRequestQueue.cancelAll(null);
     }
 
     protected void addToRequestQueue(Request req) {
-        getRequestQueue().add(req);
+        mRequestQueue.add(req);
     }
 
 }

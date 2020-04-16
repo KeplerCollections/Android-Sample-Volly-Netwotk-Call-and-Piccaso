@@ -2,15 +2,11 @@ package com.kepler.codechallenge.presenters;
 
 import androidx.annotation.NonNull;
 
-import com.google.gson.JsonArray;
 import com.kepler.codechallenge.api.VolleyCallback;
 import com.kepler.codechallenge.api.VolleyController;
 import com.kepler.codechallenge.boilers.MVPImpl;
-import com.kepler.codechallenge.pojo.DeliveriesDetails;
 
 import org.json.JSONArray;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
@@ -29,7 +25,7 @@ public class MainPresnter extends MVPImpl<AppLogic.MainView> implements AppLogic
     public void loadData(String url_appender, DisposableSingleObserver disposableSingleObserver) {
         if (view == null)
             return;
-
+        view.startProgressing();
         Disposable subscription = getDeliveries(url_appender)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -49,16 +45,20 @@ public class MainPresnter extends MVPImpl<AppLogic.MainView> implements AppLogic
                     @Override
                     public void onResponse(JSONArray response) {
                         e.onSuccess(response.toString());
+                        stopProgrss();
+                    }
+
+                    private void stopProgrss() {
+                        if (view != null)
+                            view.stopProgressing();
                     }
 
                     @Override
                     public void onError(Throwable errorMessage) {
-                        try {
-                            if(!e.isDisposed())
+
+                        if (!e.isDisposed())
                             e.onError(errorMessage);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
+                        stopProgrss();
                     }
 
                 });

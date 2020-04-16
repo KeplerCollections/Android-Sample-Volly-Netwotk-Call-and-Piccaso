@@ -6,11 +6,13 @@
     android:background="@drawable/rect_primary"
     android:orientation="horizontal">
 
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:id="@+id/imageview"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@android:drawable/ic_menu_upload" />
+        android:src="@android:drawable/stat_sys_download_done"
+        android:layout_margin="3dp"
+         />
 
     <TextView
         android:id="@+id/des"

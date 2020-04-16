@@ -1,6 +1,7 @@
 package com.kepler.codechallenge.boilers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kepler.codechallenge.R;
 import com.kepler.codechallenge.api.VolleyController;
 
 import butterknife.ButterKnife;
@@ -24,7 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
-        unbinder=ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         init();
     }
 
@@ -63,7 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-  protected void disableBackButton() {
+    protected void disableBackButton() {
         if (getSupportActionBar() == null)
             return;
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -72,13 +74,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void replaceFragment(BaseFragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(getContainerId(), fragment).commit();
     }
-  protected void replaceFragment(BaseFragment fragment,String tag) {
+
+    protected void replaceFragment(BaseFragment fragment, String tag) {
         getSupportFragmentManager().beginTransaction().replace(getContainerId(), fragment).addToBackStack(null).commit();
     }
 
-    protected void addFragment(BaseFragment fragment) {
+    protected void addFragment(BaseFragment fragment,String backStack) {
         getSupportFragmentManager().beginTransaction().add(getContainerId(), fragment).addToBackStack(null).commit();
     }
+
+    protected void addFragment(BaseFragment fragment) {
+        getSupportFragmentManager().beginTransaction().add(getContainerId(), fragment).commit();
+    }
+
+    protected void startActivity(Class baseActivity) {
+        startActivity(new Intent(this, baseActivity));
+
+    }
+
 
     protected abstract int getContainerId();
 

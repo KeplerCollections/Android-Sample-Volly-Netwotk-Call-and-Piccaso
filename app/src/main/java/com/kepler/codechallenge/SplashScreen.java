@@ -28,8 +28,4 @@ public class SplashScreen extends BaseActivity {
         return R.layout.activity_splash_screen;
     }
 
-    @Override
-    protected int getContainerId() {
-        return 0;
-    }
 }

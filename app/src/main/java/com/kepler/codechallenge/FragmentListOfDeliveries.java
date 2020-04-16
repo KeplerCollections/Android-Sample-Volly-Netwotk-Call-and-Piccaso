@@ -6,16 +6,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.kepler.codechallenge.api.VolleyController;
 import com.kepler.codechallenge.boilers.BaseFragment;
 import com.kepler.codechallenge.pojo.DeliveriesDetails;
-import com.kepler.codechallenge.pojo.LocationDetails;
 import com.kepler.codechallenge.support.interfaces.MainFragmentCommunicator;
 import com.kepler.codechallenge.support.interfaces.SetOnRecyclerViewItemClickListener;
 
@@ -30,7 +27,7 @@ public class FragmentListOfDeliveries extends BaseFragment<MainFragmentCommunica
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
-    private Gson gson=new Gson();
+    private final Gson gson = new Gson();
     private DeliveryViewAdapter mAdapter;
 
     @Override
@@ -42,8 +39,8 @@ public class FragmentListOfDeliveries extends BaseFragment<MainFragmentCommunica
             @Override
             public void onItemClick(DeliveriesDetails deliveriesDetails) {
 
-                bundle=new Bundle();
-                bundle.putParcelable(PARAM_DATA,deliveriesDetails);
+                bundle = new Bundle();
+                bundle.putParcelable(PARAM_DATA, deliveriesDetails);
                 communicator.replaceNewFragment(FragmentDeliveryDetail.getInstance(bundle));
             }
         });
@@ -72,7 +69,8 @@ public class FragmentListOfDeliveries extends BaseFragment<MainFragmentCommunica
             @Override
             public void onSuccess(@NonNull String deliveries) {
                 Log.e("ddd", deliveries);
-                mAdapter.add(gson.fromJson(deliveries,new TypeToken<List<DeliveriesDetails>>(){}.getType()));
+                mAdapter.add(gson.fromJson(deliveries, new TypeToken<List<DeliveriesDetails>>() {
+                }.getType()));
 
             }
 
@@ -93,9 +91,4 @@ public class FragmentListOfDeliveries extends BaseFragment<MainFragmentCommunica
         recyclerView.setAdapter(mAdapter);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-    }
 }

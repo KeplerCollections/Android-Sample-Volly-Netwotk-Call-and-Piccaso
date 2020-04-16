@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
     android:background="@drawable/rect_primary"
     android:orientation="horizontal">
 
@@ -12,7 +14,7 @@
         android:layout_height="60dp"
         android:src="@android:drawable/stat_sys_download_done"
         android:layout_margin="3dp"
-         />
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/des"

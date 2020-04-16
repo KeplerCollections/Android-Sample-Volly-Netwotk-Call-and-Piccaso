@@ -1,13 +1,8 @@
 package com.kepler.codechallenge.api;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.LruCache;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class VolleyController extends RequestCall {

@@ -94,28 +94,14 @@ public class FragmentDeliveryDetail extends BaseFragment<BaseFragmentCommunicato
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
-                mapboxMap.addMarker(new MarkerOptions()
+                mapboxMap.
+                        addMarker(new MarkerOptions()
                         .position(new LatLng(deliveriesDetails.getLocation().getLat(), deliveriesDetails.getLocation().getLng()))
                         .title(des.getText().toString()));
 //                mapboxMap.setCameraPosition(getCameraPosition());
 
             }
 
-            private CameraPosition getCameraPosition() {
-                LatLng target = new LatLng(
-                        deliveriesDetails.getLocation().getLat(),
-                        deliveriesDetails.getLocation().getLng()
-                );
-                return new CameraPosition.Builder()
-                        .target(target)
-                        .build();
-            }
         });
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 }

@@ -1,18 +1,14 @@
 package com.kepler.codechallenge;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.android.volley.toolbox.ImageLoader;
 import com.kepler.codechallenge.pojo.DeliveriesDetails;
 import com.kepler.codechallenge.support.interfaces.SetOnRecyclerViewItemClickListener;
 import com.squareup.picasso.Picasso;
@@ -27,12 +23,13 @@ import butterknife.ButterKnife;
 public class DeliveryViewAdapter extends RecyclerView.Adapter<DeliveryViewAdapter.LayoutViewHolder> {
 
     private final SetOnRecyclerViewItemClickListener setOnRecyclerViewItemClickListener;
-    private List<DeliveriesDetails> dataSet = new ArrayList<>();
+    private final List<DeliveriesDetails> dataSet = new ArrayList<>();
 
     public DeliveryViewAdapter(SetOnRecyclerViewItemClickListener setOnRecyclerViewItemClickListener) {
         this.setOnRecyclerViewItemClickListener = setOnRecyclerViewItemClickListener;
     }
 
+    @NonNull
     @Override
     public LayoutViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_delivery_view, parent, false);
@@ -68,7 +65,7 @@ public class DeliveryViewAdapter extends RecyclerView.Adapter<DeliveryViewAdapte
         @BindView(R.id.imageview)
         ImageView imageview;
 
-        public LayoutViewHolder(View itemView) {
+        LayoutViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);

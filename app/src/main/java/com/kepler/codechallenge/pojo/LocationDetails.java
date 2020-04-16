@@ -1,8 +1,5 @@
 package com.kepler.codechallenge.pojo;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class LocationDetails {
     private double lat;
     private double lng;

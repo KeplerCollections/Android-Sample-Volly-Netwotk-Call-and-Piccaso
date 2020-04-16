@@ -6,9 +6,9 @@ import android.widget.ProgressBar;
 
 import com.kepler.codechallenge.boilers.BaseFragment;
 import com.kepler.codechallenge.boilers.MVPActivity;
-import com.kepler.codechallenge.support.interfaces.MainFragmentCommunicator;
 import com.kepler.codechallenge.presenters.AppLogic;
 import com.kepler.codechallenge.presenters.MainPresnter;
+import com.kepler.codechallenge.support.interfaces.MainFragmentCommunicator;
 import com.mapbox.mapboxsdk.Mapbox;
 
 import butterknife.BindView;
@@ -20,6 +20,7 @@ public class MainActivity extends MVPActivity<AppLogic.MainLogic> implements App
 
     @BindView(R.id.progress)
     ProgressBar progressBar;
+
     @Override
     protected AppLogic.MainLogic createPresenter() {
         return new MainPresnter();
@@ -42,14 +43,10 @@ public class MainActivity extends MVPActivity<AppLogic.MainLogic> implements App
         return R.id.container;
     }
 
-    @Override
-    public boolean isNetworkAvailble() {
-        return isConnected();
-    }
 
     @Override
     public void setFragmentTitle(int title) {
-        getSupportActionBar().setTitle(title);
+        setActionBarTitle(title);
     }
 
     @Override
@@ -57,14 +54,10 @@ public class MainActivity extends MVPActivity<AppLogic.MainLogic> implements App
         toastMessage(msg);
     }
 
-    @Override
-    public void addNewFragment(BaseFragment baseFragment) {
-
-    }
 
     @Override
     public void replaceNewFragment(BaseFragment baseFragment) {
-        replaceFragment(baseFragment,null);
+        replaceFragment(baseFragment, null);
     }
 
     @Override

@@ -4,12 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class DeliveriesDetails implements Parcelable {
-    private int id;
-    private String description;
-    private String imageUrl;
+    private final String description;
+    private final String imageUrl;
     private LocationDetails location;
 
-    protected DeliveriesDetails(Parcel in) {
+    private DeliveriesDetails(Parcel in) {
         description = in.readString();
         imageUrl = in.readString();
     }
@@ -26,9 +25,6 @@ public class DeliveriesDetails implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
-    }
 
     public String getDescription() {
         return description;

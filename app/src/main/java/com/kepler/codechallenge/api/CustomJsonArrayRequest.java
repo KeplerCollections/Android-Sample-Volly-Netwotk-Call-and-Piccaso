@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class CustomJsonArrayRequest extends JsonRequest<JSONArray> {
+class CustomJsonArrayRequest extends JsonRequest<JSONArray> {
 
     /**
      * Creates a new request.

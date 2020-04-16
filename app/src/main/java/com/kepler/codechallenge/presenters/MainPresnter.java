@@ -19,7 +19,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainPresnter extends MVPImpl<AppLogic.MainView> implements AppLogic.MainLogic {
 
-    private CompositeDisposable disposable = new CompositeDisposable();
+    private final CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
     public void loadData(String url_appender, DisposableSingleObserver disposableSingleObserver) {
@@ -37,7 +37,7 @@ public class MainPresnter extends MVPImpl<AppLogic.MainView> implements AppLogic
     }
 
 
-    public Single<String> getDeliveries(String url_appender) {
+    private Single<String> getDeliveries(String url_appender) {
         return Single.create(new SingleOnSubscribe<String>() {
             @Override
             public void subscribe(@NonNull final SingleEmitter<String> e) {

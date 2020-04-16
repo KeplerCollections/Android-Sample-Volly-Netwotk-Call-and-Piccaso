@@ -26,7 +26,7 @@ public abstract class BaseFragment<T extends BaseFragmentCommunicator> extends F
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof MainFragmentCommunicator)
             communicator = (T) context;
@@ -39,11 +39,6 @@ public abstract class BaseFragment<T extends BaseFragmentCommunicator> extends F
     }
 
     protected abstract int getFragmentTitle();
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
 
     @Nullable
     @Override
@@ -60,16 +55,6 @@ public abstract class BaseFragment<T extends BaseFragmentCommunicator> extends F
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    protected void addChildFragment(BaseFragment baseFragment) {
-        if (getFragmentContainer() == 0)
-            return;
-        getChildFragmentManager().beginTransaction().add(getFragmentContainer(), baseFragment).commit();
-    }
-
-    protected  int getFragmentContainer(){
-        return 0;
     }
 
 }

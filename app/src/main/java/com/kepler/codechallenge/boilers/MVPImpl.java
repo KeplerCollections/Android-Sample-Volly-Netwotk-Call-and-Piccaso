@@ -12,6 +12,7 @@ public abstract class MVPImpl<T extends MVP.BaseView> implements MVP.BasePresent
         this.view = view;
     }
 
+
     @Override
     public void detachView() {
         this.view = null;

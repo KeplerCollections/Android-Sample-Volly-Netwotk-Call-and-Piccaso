@@ -10,11 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.kepler.codechallenge.support.interfaces.MainFragmentCommunicator;
+
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends BaseFragmentCommunicator> extends Fragment {
 
-    protected FragmentCommunicator communicator;
+    protected T communicator;
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,22 +26,35 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof FragmentCommunicator)
-            communicator = (FragmentCommunicator) context;
+        if (context instanceof MainFragmentCommunicator)
+            communicator = (T) context;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        communicator.setFragmentTitle(getFragmentTitle());
+    }
+
+    protected abstract int getFragmentTitle();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        view = inflater.inflate(getViewResource(), container, false);
         View view = inflater.inflate(getContentView(), container, false);
-        ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
     protected abstract int getContentView();
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
 }

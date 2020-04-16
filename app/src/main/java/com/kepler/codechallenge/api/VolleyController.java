@@ -2,9 +2,7 @@ package com.kepler.codechallenge.api;
 
 import android.content.Context;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class VolleyController extends RequestCall {
@@ -13,6 +11,7 @@ public class VolleyController extends RequestCall {
 
     private VolleyController(Context context) {
         mCtx = context;
+        init();
     }
 
     public static synchronized VolleyController getInstance(Context context) {
@@ -26,6 +25,7 @@ public class VolleyController extends RequestCall {
         mInstance = null;
         mCtx = null;
     }
+
 
     @Override
     protected RequestQueue initRequestQueue() {

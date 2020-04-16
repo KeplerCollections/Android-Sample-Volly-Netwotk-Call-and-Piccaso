@@ -21,5 +21,6 @@ public interface MVP {
         void attachView(T view);
 
         void detachView();
+
     }
 }

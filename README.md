@@ -4,26 +4,27 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* This repository is sample project which shows list of data and details of it.
+* 1
+* Used MVP Architecture (Tight Coupling)
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
+
+* Download the samples by cloning this repository or downloading an archived snapshot. (See the options at the top of the page.)
 * Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Dependency Injection
+-jakewharton is used.
 
-### Contribution guidelines ###
+* Reactive Programming and Network Libraies
+-Volley is used for networking
 
-* Writing tests
-* Code review
-* Other guidelines
+* Map
+-MapBox Used [Used depricated methods to plot a marker]
 
-### Who do I talk to? ###
+* Image Processing
+-Piccaso is used.
 
-* Repo owner or admin
-* Other community or team contact
+* Database configuration - No Need
+* Deployment instructions - Plug and Play
+

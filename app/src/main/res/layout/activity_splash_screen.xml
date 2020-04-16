@@ -6,11 +6,16 @@
     android:background="@color/colorPrimary"
     tools:context=".SplashScreen">
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@mipmap/ic_launcher"
+        android:drawableTop="@mipmap/ic_launcher"
+        android:text="@string/delivery"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:contentDescription="@string/app_name" />
 
 </FrameLayout>

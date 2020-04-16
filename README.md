@@ -10,6 +10,12 @@ This README would normally document whatever steps are necessary to get your app
 * Used MVP Architecture (Tight Coupling)
 
 
+### ScreenShots ###
+![Image](https://i.imgur.com/cTkRWEi.png)
+![Image](https://i.imgur.com/aEDT8Tv.png)
+![Image](https://i.imgur.com/cqudVhE.png)
+
+
 ### How do I get set up? ###
 
 * Download the samples by cloning this repository or downloading an archived snapshot. (See the options at the top of the page.)

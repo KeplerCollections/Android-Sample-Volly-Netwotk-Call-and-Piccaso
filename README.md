@@ -21,7 +21,7 @@ This README would normally document whatever steps are necessary to get your app
 * Download the samples by cloning this repository or downloading an archived snapshot. (See the options at the top of the page.)
 
 ### Dependencies ###
-#### Dependency Injection ####
+#### View Binder ####
 * jakewharton is used.
 
 #### Reactive Programming and Network Libraies ####
